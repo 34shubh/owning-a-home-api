@@ -247,7 +247,7 @@
 
 <p>See <code>/data/2017/README.md</code> for details about the 2017 data.</p>
 <p>Countylimit data updates normally occur in late December. After an update is loaded and tested, we export it as a fixture to make it loadable with a standard <code>loaddata</code> Django command. This command will update the fixture:</p>
-<pre><code>python manage.py dumpdata countylimits --indent=4 &gt; data/countylimits.json
+<pre><code>python manage.py dumpdata countylimits --indent=4 &gt; countylimits/fixtures/countylimits.json
 </code></pre>
 
 <h4 id="mortgageinsurance">mortgageinsurance</h4>
