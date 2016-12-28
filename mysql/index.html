@@ -84,7 +84,8 @@
             <section id="main" class="main-content" role="main">
                 <h1 id="using-mysql">Using MySQL</h1>
 <p>For testing, the default Django sqlite database will be set up for you automatically. If you want to load a MySQL dataset, you can edit <code>settings_for_testing.py</code> to uncomment the MySQL database section and install MySQL as follows:</p>
-<pre><code class="shell">brew install mysql
+<pre><code class="shell">pip install requirements/mysql.txt
+brew install mysql
 </code></pre>
 
 <p>Start the MySQL Server, this command may need to be run again (if stopped) when trying to bring up the web server later:</p>
