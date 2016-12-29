@@ -239,15 +239,20 @@
 </tbody>
 </table>
 <p>countylimits will return a JSON object containing <code>state</code>, <code>county</code>, <code>complete_fips</code>, <code>gse_limit</code>, <code>fha_limit</code>, and <code>va_limit</code>.</p>
-<p>countylimits has a management command, <code>load_county_limits</code>, which loads these limits from a CSV file. Source CSVs are stored in the /data directory. The latest version is <a href="https://github.com/cfpb/owning-a-home-api/blob/master/data/2017/2017_amended.csv">data/2017/2017_amended.csv</a>.</p>
+<p>countylimits has a management command, <code>load_county_limits</code>, that loads these limits from a CSV file. Source CSVs are stored in the /data directory. The latest version is <a href="https://github.com/cfpb/owning-a-home-api/blob/master/data/2017/2017_amended.csv">data/2017/2017_amended.csv</a>.</p>
 <p>The <code>load_county_limits</code> command takes two arguments to fully run: file path and <code>--confirm=y</code></p>
-<p>So the full command to load the data for 2017 would be:</p>
+<p>So the full command to load the data for 2017 was:</p>
 <pre><code>python manage.py load_county_limits data/2017/2017_amended.csv --confirm=y
 </code></pre>
 
+<p>The command deletes all State, County and CountyLimit objects and reloads them.</p>
 <p>See <code>/data/2017/README.md</code> for details about the 2017 data.</p>
-<p>Countylimit data updates normally occur in late December. After an update is loaded and tested, we export it as a fixture to make it loadable with a standard <code>loaddata</code> Django command. This command will update the fixture:</p>
-<pre><code>python manage.py dumpdata countylimits --indent=4 &gt; countylimits/fixtures/countylimits.json
+<p>Countylimit data updates normally occur in late December. After an update is loaded and tested, we export it as a fixture for testing, and as a consistent loading option. We use this command to update the fixture:</p>
+<pre><code>python manage.py dumpdata countylimits --indent=4 &gt; countylimits/fixtures/countylimit_data.json
+</code></pre>
+
+<p>And it can be loaded locally with:</p>
+<pre><code>python manage.py loaddata countylimit_data.json
 </code></pre>
 
 <h4 id="mortgageinsurance">mortgageinsurance</h4>
