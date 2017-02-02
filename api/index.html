@@ -247,7 +247,7 @@
 
 <p>The command deletes all State, County and CountyLimit objects and reloads them.</p>
 <p>See <code>/data/2017/README.md</code> for details about the 2017 data.</p>
-<p>Countylimit data updates normally occur in late December. After an update is loaded and tested, we export it as a fixture for testing, and as a consistent loading option. We use this command to update the fixture:</p>
+<p>Countylimit data updates normally occur in late December. After an update is loaded and tested, we export it as a fixture for testing, and as a local loading option. We use this command to update the fixture:</p>
 <pre><code>python manage.py dumpdata countylimits --indent=4 &gt; countylimits/fixtures/countylimit_data.json
 </code></pre>
 
@@ -255,94 +255,7 @@
 <pre><code>python manage.py loaddata countylimit_data.json
 </code></pre>
 
-<h4 id="mortgageinsurance-deactivated">mortgageinsurance (deactivated)</h4>
-<p>This feature has been deprecated and is not currently in use.</p>
-<p>This app exposes a single API endpoint, <code>/oah-api/mortgage-insurance</code>, with the following parameters:</p>
-<table>
-<thead>
-<tr>
-<th>Param name</th>
-<th>Description</th>
-<th align="center">Required</th>
-<th align="right">Default value</th>
-<th align="left">Acceptable values<br>(values = description)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>arm_type</td>
-<td>The type of ARM</td>
-<td align="center">No, unless rate_structure=arm</td>
-<td align="right">N/A</td>
-<td align="left">3-1 = 3/1 ARM,<br>5-1 = 5/1 ARM,<br>7-1 = 7/1 ARM,<br>10-1 = 10/1 ARM</td>
-</tr>
-<tr>
-<td>loan_amount</td>
-<td>The amount of the loan</td>
-<td align="center">Yes</td>
-<td align="right">N/A</td>
-<td align="left"><em>any positive integer</em></td>
-</tr>
-<tr>
-<td>loan_term</td>
-<td>The loan term (years)</td>
-<td align="center">Yes</td>
-<td align="right">N/A</td>
-<td align="left">30, 15</td>
-</tr>
-<tr>
-<td>loan_type</td>
-<td>The type of loan</td>
-<td align="center">Yes</td>
-<td align="right">N/A</td>
-<td align="left">JUMBO = Jumbo Loan,<br>CONF = Conventional Loan,<br>AGENCY = Agency Loan,<br>FHA = Federal Housing Administration Loan,<br>VA = Veteran Affairs Loan,<br>VA-HB = Veteran Affairs High Balance Loan,<br>FHA-HB = Federal Housing Administration High Balance Loan</td>
-</tr>
-<tr>
-<td>maxfico</td>
-<td>The maximum FICO score</td>
-<td align="center">Yes</td>
-<td align="right">N/A</td>
-<td align="left">0 - 850.<br>In practice, &lt;600 will return no results.  For optimal functioning, MinFICO and MaxFICO should be coordinated.  Either, they should be the same value, thereby providing a point estimate of the FICO score, or they should be configured to provide a 20-point range, eg, 700-719.  Ranges should be specified to start on an even 20 multiple and end on a 19, 39, 59, etc., except for the top bucket which is 840-850.</td>
-</tr>
-<tr>
-<td>minfico</td>
-<td>The minimum FICO score</td>
-<td align="center">Yes</td>
-<td align="right">N/A</td>
-<td align="left">0 - 850,<br>see maxfico for more info.</td>
-</tr>
-<tr>
-<td>price</td>
-<td>The price of the property</td>
-<td align="center">Yes</td>
-<td align="right">N/A</td>
-<td align="left"><em>In general, should be larger than the loan_amount.</em></td>
-</tr>
-<tr>
-<td>rate_structure</td>
-<td>The rate structure of the loan</td>
-<td align="center">Yes</td>
-<td align="right">N/A</td>
-<td align="left">FIXED = Fixed Rate,<br>ARM = Adjusted Rate Mortgage</td>
-</tr>
-<tr>
-<td>va_status</td>
-<td>The Veteran Status</td>
-<td align="center">No, unless loan_type=va or va-hb</td>
-<td align="right">N/A</td>
-<td align="left">DISABLED = Veteran with Disablility<br>RES-NG = Reserve or National Guard<br>REGULAR = Regular</td>
-</tr>
-<tr>
-<td>va_first_use</td>
-<td>Is this the first time using VA loan?</td>
-<td align="center">No, unless loan_type=va or va-hb</td>
-<td align="right">N/A</td>
-<td align="left">1 = True<br>0 = False</td>
-</tr>
-</tbody>
-</table>
-<p>mortgageinsurance will return a JSON object containing <code>data</code> and <code>request</code>.  Data will contain <code>monthly</code> for monthly average premium in percentages (it is an average premium calculated based on premium from all insurers), and <code>upfront</code> for upfront premium in percentage.  No data will be returned if no premium were found.  <code>Request</code> will be the parameter list.</p>
-<p>mortgageinsurance has a management command, <code>load_mortgage_insurance</code>, which loads monthly and upfront data from two CSV files.</p>
+<p>Our standard loading path on servers is to use the <code>load_county_limits</code> management command.</p>
             </section>
         </div>
 
