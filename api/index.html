@@ -35,9 +35,7 @@
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
       <script src="../js/respond.min.js"></script>
-    <![endif]-->
-    <script src="../search/require.js"></script>
-    <script src="../search/search.js"></script> 
+    <![endif]--> 
 </head>
 
 <body>
@@ -212,9 +210,10 @@
 </tr>
 </tbody>
 </table>
-<p>*1: We actually calculate its value and don't check the value sent in request</p>
-<p>ratechecker will return a JSON object containing <code>data</code> and <code>timestamp</code>, it will also contain
-<code>fees</code> field when requesting <code>/oah-api/rates/rate-checker-fees</code>.</p>
+<p><span id="1">*1</span>: We actually calculate its value and don't check the value sent in request</p>
+<p>The ratechecker will return a JSON object containing <code>data</code> and <code>timestamp</code>. It will also contain
+a <code>fees</code> field when requesting <code>/oah-api/rates/rate-checker-fees</code>.</p>
+<p>The <code>timestamp</code> will be <code>null</code> if a timestamp can't be found, which could happen if a request is made just as tables are being updated.</p>
 <p>ratechecker has a management command, <code>load_daily_data</code>, which loads daily interest rate data from CSV.</p>
 <h4 id="countylimits">countylimits</h4>
 <p>This app exposes a single API endpoint, <code>/oah-api/county</code>, which requires a <code>state</code> parameter for querying Federal Housing Administration loan lending limit, Government-Sponsored Enterprises mortgage loan limit and the Department of Veterans Affairs loan guaranty program limit for the counties in a given state.</p>
